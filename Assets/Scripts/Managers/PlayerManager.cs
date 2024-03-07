@@ -14,11 +14,17 @@ namespace Managers
         #region Self Variables
 
         [SerializeField] private MovementController movementController;
-
+        [SerializeField] private PhysicController physicController;
+        [SerializeField] private HoleController holeController;
         private PlayerData _playerData = new PlayerData();
         #endregion
 
         private void Awake()
+        {
+            SetData();
+        }
+
+        private void SetData()
         {
             Addressables.LoadAssetAsync<CD_PlayerData>("Assets/GameDatas/Data/CD_PlayerData.asset").Completed +=
                 (asyncOperationHandle) =>
@@ -27,14 +33,14 @@ namespace Managers
                     {
                         _playerData = asyncOperationHandle.Result.Data;
                         movementController.SetMovementData(_playerData);
+                        physicController.SetPhysicData(_playerData.physicData);
+                        holeController.SetHoleData(_playerData.holeData);
                     }
                     else
                     {
                         Debug.Log("Failed");
                     }
                 };
-            
-
         }
 
 

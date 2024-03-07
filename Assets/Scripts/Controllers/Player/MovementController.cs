@@ -44,7 +44,7 @@ namespace Controllers.Player
 
         public void SetMovementData(PlayerData data)
         {
-            _moveFactor = data.MoveFactor;
+            _moveFactor = data.moveFactor;
         }
         
         private void Move()

@@ -13,4 +13,10 @@ MonoBehaviour:
   m_Name: CD_PlayerData
   m_EditorClassIdentifier: 
   Data:
-    MoveFactor: 2
+    moveFactor: 2
+    physicData:
+      noColliderLayer: noColl
+      defaultLayer: Default
+    holeData:
+      scaleUpBorder: 5
+      increaseAmount: 2
