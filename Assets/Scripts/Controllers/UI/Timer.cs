@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Managers;
 using Signals;
 using TMPro;
@@ -35,7 +36,7 @@ namespace Controllers.UI
             await UniTask.Delay(1000,cancellationToken:_cancellationTokenSource.Token);
             if (_currentTime<=0)
             {
-                GameSignals.Instance.onFail?.Invoke();
+                GameSignals.Instance.onLevelFinish?.Invoke();
                 StopTimer();
             }
             else
@@ -46,7 +47,7 @@ namespace Controllers.UI
             int minutes = _currentTime / 60;
             int seconds = _currentTime % 60;
             timeTMP.text = $"{minutes:00}:{seconds:00}";
-            //timeProgressImage.DOFillAmount()
+            timeProgressImage.DOFillAmount((float)_currentTime / TimeBorder, 1f).SetEase(Ease.Linear);
         }
 
         public void StopTimer()

@@ -56,6 +56,8 @@ namespace Managers
             GameSignals.Instance.onInputTaken += OnActivateMovement;
             GameSignals.Instance.onInputReleased += OnDeactivateMovement;
             GameSignals.Instance.onJoystickDragged += OnSetInputValues;
+            GameSignals.Instance.onPlay += OnPlay;
+            GameSignals.Instance.onGetPlayerTransform += OnGetPlayerTransform;
         }
 
         
@@ -64,7 +66,8 @@ namespace Managers
             GameSignals.Instance.onInputTaken -= OnActivateMovement;
             GameSignals.Instance.onInputReleased -= OnDeactivateMovement;
             GameSignals.Instance.onJoystickDragged -= OnSetInputValues;
-
+            GameSignals.Instance.onPlay -= OnPlay;
+            GameSignals.Instance.onGetPlayerTransform -= OnGetPlayerTransform;
         }
 
         private void OnDisable()
@@ -87,6 +90,16 @@ namespace Managers
         private void OnSetInputValues(InputParams arg0)
         {
             movementController.SetInputValues(arg0);
+        }
+
+        private void OnPlay()
+        {
+            GameSignals.Instance.onSetCameraTarget?.Invoke(transform);
+        }
+
+        private Transform OnGetPlayerTransform()
+        {
+            return transform;
         }
     }
 }

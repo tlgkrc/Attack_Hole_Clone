@@ -44,6 +44,8 @@ namespace Managers
             GameSignals.Instance.onSuccess += OnSuccess;
             GameSignals.Instance.onSetScoreText += OnSetScoreText;
             GameSignals.Instance.onSetLevelScoreBorder += OnSetLevelScoreBorder;
+            GameSignals.Instance.onSetLevelText += OnSetLevelText;
+            GameSignals.Instance.onSetAttemptText += OnSetAttemptText;
         }
 
         private void UnsubscribeEvents()
@@ -53,6 +55,8 @@ namespace Managers
             GameSignals.Instance.onSuccess -= OnSuccess;
             GameSignals.Instance.onSetScoreText -= OnSetScoreText;
             GameSignals.Instance.onSetLevelScoreBorder -= OnSetLevelScoreBorder;
+            GameSignals.Instance.onSetLevelText -= OnSetLevelText;
+            GameSignals.Instance.onSetAttemptText -= OnSetAttemptText;
         }
 
         private void OnDisable()
@@ -76,6 +80,7 @@ namespace Managers
 
         private void OnFail()
         {
+            timer.StopTimer();
             _uiPanelHandler.Execute(UIPanels.GamePanel,false);
             _uiPanelHandler.Execute(UIPanels.FailPanel, true);
         }
@@ -83,6 +88,8 @@ namespace Managers
         private void OnSuccess()
         {
             timer.StopTimer();
+            _uiPanelHandler.Execute(UIPanels.GamePanel,false);
+            _uiPanelHandler.Execute(UIPanels.SuccessPanel, true);
         }
 
         private void OnSetScoreText(float value)
@@ -93,6 +100,16 @@ namespace Managers
         private void OnSetLevelScoreBorder(float value)
         {
             slider.SetLevelScoreBorder(value);
+        }
+
+        private void OnSetLevelText(int level)
+        {
+            slider.SetLevelText(level);
+        }
+
+        private void OnSetAttemptText(int attemptNumber)
+        {
+            slider.SetAttemptText(attemptNumber);
         }
     }
 }

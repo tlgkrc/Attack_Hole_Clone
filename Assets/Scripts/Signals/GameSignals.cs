@@ -1,4 +1,5 @@
 ﻿using System;
+using Enums;
 using Extensions;
 using Keys;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace Signals
         public UnityAction onPlay = delegate {  };
         public UnityAction onFail = delegate {  };
         public UnityAction onSuccess = delegate {  };
+        public UnityAction onLevelFinish = delegate {  };
 
         #endregion
 
@@ -43,6 +45,7 @@ namespace Signals
         #region Score
 
         public UnityAction<float> onSetNewScore;
+        public Func<float> onGetCurrentScore;
 
         #endregion
 
@@ -50,6 +53,16 @@ namespace Signals
 
         public UnityAction<float> onSetScoreText;
         public UnityAction<float> onSetLevelScoreBorder;
+        public UnityAction<int> onSetAttemptText;
+        public UnityAction<int> onSetLevelText;
+
+        #endregion
+
+        #region Camera
+
+        public UnityAction<Transform> onSetCameraTarget;
+        public UnityAction<CameraStates> onSetCameraState;
+        public Func<Transform> onGetPlayerTransform;
 
         #endregion
 

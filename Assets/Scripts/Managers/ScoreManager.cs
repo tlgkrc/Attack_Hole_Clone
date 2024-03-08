@@ -26,6 +26,7 @@ namespace Managers
             GameSignals.Instance.onFail += OnFail;
             GameSignals.Instance.onSuccess += OnSuccess;
             GameSignals.Instance.onSetNewScore += OnSetNewScore;
+            GameSignals.Instance.onGetCurrentScore += OnGetCurrentScore;
         }
 
        private void UnsubscribeEvents()
@@ -34,6 +35,7 @@ namespace Managers
             GameSignals.Instance.onFail -= OnFail;
             GameSignals.Instance.onSuccess -= OnSuccess;
             GameSignals.Instance.onSetNewScore -= OnSetNewScore;
+            GameSignals.Instance.onGetCurrentScore -= OnGetCurrentScore;
         }
 
         private void OnDisable()
@@ -65,6 +67,11 @@ namespace Managers
         {
             _currentScore += value;
             GameSignals.Instance.onSetScoreText?.Invoke(_currentScore);
+        }
+
+        private float OnGetCurrentScore()
+        {
+            return _currentScore;
         }
     }
 }
