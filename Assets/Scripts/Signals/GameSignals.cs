@@ -1,5 +1,7 @@
-﻿using Extensions;
+﻿using System;
+using Extensions;
 using Keys;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Signals
@@ -31,6 +33,27 @@ namespace Signals
         public UnityAction<int> onResetLevel; //int value represents attempt number
 
         #endregion
+
+        #region Collectable
+
+        public UnityAction<GameObject> onWarnCollectable;
+
+        #endregion
+
+        #region Score
+
+        public UnityAction<float> onSetNewScore;
+
+        #endregion
+
+        #region UI
+
+        public UnityAction<float> onSetScoreText;
+        public UnityAction<float> onSetLevelScoreBorder;
+
+        #endregion
+
+
 
 
     }

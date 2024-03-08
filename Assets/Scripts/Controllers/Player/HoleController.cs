@@ -1,5 +1,9 @@
-﻿using Data.ValueObject;
+﻿using System.Threading;
+using Cysharp.Threading.Tasks;
+using Data.ValueObject;
+using DG.Tweening;
 using Managers;
+using Signals;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,16 +24,24 @@ namespace Controllers.Player
         {
             if (other.CompareTag("Collectable"))
             {
-                other.gameObject.SetActive(false);
-                _currentNumber++;
-                image.fillAmount = (float)_currentNumber / _holeData.scaleUpBorder;
-                if (_currentNumber == _holeData.scaleUpBorder)
-                {
-                    manager.transform.localScale += new Vector3(.3f, 0,.3f);
-                    _holeData.scaleUpBorder += _holeData.increaseAmount;
-                    image.fillAmount = 0;
-                    _currentNumber = 0;
-                }
+                var parent = other.transform.parent;
+                GameSignals.Instance.onWarnCollectable?.Invoke(parent.gameObject);
+                parent.gameObject.SetActive(false);
+                FillCircle();
+            }
+        }
+
+        private async void FillCircle()
+        {
+            _currentNumber++;
+            await image.DOFillAmount((float)_currentNumber / _holeData.scaleUpBorder, .2f);
+
+            if (_currentNumber >= _holeData.scaleUpBorder)
+            {
+                manager.transform.localScale += new Vector3(.3f, 0, .3f);
+                _holeData.scaleUpBorder += _holeData.increaseAmount;
+                image.fillAmount = 0;
+                _currentNumber = 0;
             }
         }
 

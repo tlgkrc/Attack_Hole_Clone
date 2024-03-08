@@ -21,6 +21,14 @@ MonoBehaviour:
     m_Address: Assets/GameDatas/Data/CD_PlayerData.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 7eaf68c17d7a79e499b65687e8055b36
+    m_Address: Assets/GameDatas/Data/CD_CollectableData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8e68d941b6039a4468a7f8ee1bd71cf8
+    m_Address: Assets/GameDatas/Data/CD_LevelData.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 28bb3a04a42eee3429df0ad9c7853e78, type: 2}
   m_SchemaSet:

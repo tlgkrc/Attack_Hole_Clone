@@ -5,7 +5,7 @@
         StartPanel,
         GamePanel,
         FinishPanel,
-        SuccessPanel,
-        FailPanel
+        FailPanel,
+        SuccessPanel
     }
 }

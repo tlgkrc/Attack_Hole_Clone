@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Commands;
+using Controllers.UI;
 using Enums;
 using Signals;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Managers
 {
@@ -13,6 +12,8 @@ namespace Managers
         #region Self Variables
 
         [SerializeField] private List<GameObject> uiPanelGameObjects;
+        [SerializeField] private Timer timer;
+        [SerializeField] private Slider slider;
 
         private UIPanelHandler _uiPanelHandler;
 
@@ -39,11 +40,19 @@ namespace Managers
         private void SubscribeEvents()
         {
             GameSignals.Instance.onPlay += OnPlay;
+            GameSignals.Instance.onFail += OnFail;
+            GameSignals.Instance.onSuccess += OnSuccess;
+            GameSignals.Instance.onSetScoreText += OnSetScoreText;
+            GameSignals.Instance.onSetLevelScoreBorder += OnSetLevelScoreBorder;
         }
 
         private void UnsubscribeEvents()
         {
             GameSignals.Instance.onPlay -= OnPlay;
+            GameSignals.Instance.onFail -= OnFail;
+            GameSignals.Instance.onSuccess -= OnSuccess;
+            GameSignals.Instance.onSetScoreText -= OnSetScoreText;
+            GameSignals.Instance.onSetLevelScoreBorder -= OnSetLevelScoreBorder;
         }
 
         private void OnDisable()
@@ -62,6 +71,28 @@ namespace Managers
         {
             _uiPanelHandler.Execute(UIPanels.StartPanel,false);
             _uiPanelHandler.Execute(UIPanels.GamePanel, true);
+            timer.StartTimer();
+        }
+
+        private void OnFail()
+        {
+            _uiPanelHandler.Execute(UIPanels.GamePanel,false);
+            _uiPanelHandler.Execute(UIPanels.FailPanel, true);
+        }
+
+        private void OnSuccess()
+        {
+            timer.StopTimer();
+        }
+
+        private void OnSetScoreText(float value)
+        {
+            slider.SetScore(value);
+        }
+
+        private void OnSetLevelScoreBorder(float value)
+        {
+            slider.SetLevelScoreBorder(value);
         }
     }
 }
