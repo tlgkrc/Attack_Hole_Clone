@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Commands;
 using Cysharp.Threading.Tasks;
 using Data.UnityObject;
 using Data.ValueObject;
@@ -14,19 +14,24 @@ namespace Managers
     {
         #region Self Variables
 
+        [SerializeField] private GameObject levelHolder;
+        
         private LevelDatas _levelDatas;
         private int _attemptNumber;
         private int _levelNumber;
         private int _currentLevel;
+        private LevelLoaderCommand _levelLoaderCommand;
+        private ClearActiveLevelCommand _clearActiveLevelCommand;
 
         #endregion
 
         private void Awake()
         {
-            SetData();
             _currentLevel = 0;
             _attemptNumber = 1;
-            
+            SetData();
+            _clearActiveLevelCommand = new ClearActiveLevelCommand(ref levelHolder,this);
+
         }
         private void SetData()
         {
@@ -36,6 +41,8 @@ namespace Managers
                     if (asyncOperationHandle.Status == AsyncOperationStatus.Succeeded)
                     {
                         _levelDatas = asyncOperationHandle.Result.levelDatas;
+                        _levelLoaderCommand = new LevelLoaderCommand(ref levelHolder,ref _levelDatas);
+                        _levelLoaderCommand.Execute(_currentLevel);
                     }
                     else
                     {
@@ -47,6 +54,7 @@ namespace Managers
 
         private void OnEnable()
         {
+           
             SubscribeEvents();
         }
         
@@ -56,6 +64,7 @@ namespace Managers
             GameSignals.Instance.onLevelFinish += OnLevelFinish;
             GameSignals.Instance.onFail += OnFail;
             GameSignals.Instance.onSuccess += OnSuccess;
+            
         }
 
         
@@ -80,12 +89,14 @@ namespace Managers
             _currentLevel++;
             GameSignals.Instance.onSetAttemptText?.Invoke(_attemptNumber);
             GameSignals.Instance.onSetLevelText?.Invoke(_currentLevel+1);
+            _clearActiveLevelCommand.Execute();
         }
 
         private void OnFail()
         {
             _attemptNumber++;
             GameSignals.Instance.onSetAttemptText?.Invoke(_attemptNumber);
+            _clearActiveLevelCommand.Execute();
         }
 
         private void OnPlay()
@@ -105,6 +116,7 @@ namespace Managers
 
         private async UniTask FinisLevel(float? currentScore)
         {
+            GameSignals.Instance.onDisableInput?.Invoke();
             GameSignals.Instance.onSetCameraState?.Invoke(CameraStates.LevelEndCam);
             await UniTask.Delay(1500);
             if (currentScore < _levelDatas.Datas[_currentLevel].LevelPassScore)
@@ -115,6 +127,7 @@ namespace Managers
             {
                 GameSignals.Instance.onSuccess?.Invoke();
             }
+            _levelLoaderCommand.Execute(_currentLevel);
         }
     }
 }

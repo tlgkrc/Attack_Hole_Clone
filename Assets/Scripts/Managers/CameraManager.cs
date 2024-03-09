@@ -31,6 +31,7 @@ namespace Managers
             GameSignals.Instance.onPlay += OnPlay;
             GameSignals.Instance.onSetCameraTarget += OnSetCameraTarget;
             GameSignals.Instance.onSetCameraState += OnSetCameraState;
+            GameSignals.Instance.onNext += OnNext;
         }
 
         
@@ -39,6 +40,7 @@ namespace Managers
             GameSignals.Instance.onPlay -= OnPlay;
             GameSignals.Instance.onSetCameraTarget -= OnSetCameraTarget;
             GameSignals.Instance.onSetCameraState -= OnSetCameraState;
+            GameSignals.Instance.onNext -= OnNext;
         }
 
         private void OnDisable()
@@ -81,6 +83,11 @@ namespace Managers
         private void OnPlay()
         {
             OnSetCameraState(CameraStates.LevelCam);
+        }
+
+        private void OnNext()
+        {
+            OnSetCameraState(CameraStates.StartCam);
         }
     }
 }

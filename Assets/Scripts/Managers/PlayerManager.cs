@@ -1,4 +1,5 @@
 ﻿using Controllers.Player;
+using Cysharp.Threading.Tasks;
 using Data.UnityObject;
 using Data.ValueObject;
 using Keys;
@@ -58,6 +59,7 @@ namespace Managers
             GameSignals.Instance.onJoystickDragged += OnSetInputValues;
             GameSignals.Instance.onPlay += OnPlay;
             GameSignals.Instance.onGetPlayerTransform += OnGetPlayerTransform;
+            GameSignals.Instance.onLevelFinish += OnLevelFinish;
         }
 
         
@@ -68,6 +70,8 @@ namespace Managers
             GameSignals.Instance.onJoystickDragged -= OnSetInputValues;
             GameSignals.Instance.onPlay -= OnPlay;
             GameSignals.Instance.onGetPlayerTransform -= OnGetPlayerTransform;
+            GameSignals.Instance.onLevelFinish -= OnLevelFinish;
+
         }
 
         private void OnDisable()
@@ -100,6 +104,18 @@ namespace Managers
         private Transform OnGetPlayerTransform()
         {
             return transform;
+        }
+
+        private void OnLevelFinish()
+        {
+            movementController.DeactivateMovement();
+        }
+
+        private async void Reset()
+        {
+            await UniTask.Delay(1000);
+            transform.localPosition = Vector3.zero;
+            transform.localScale = Vector3.one;
         }
     }
 }

@@ -15,6 +15,8 @@ namespace Signals
         public UnityAction onFail = delegate {  };
         public UnityAction onSuccess = delegate {  };
         public UnityAction onLevelFinish = delegate {  };
+        public UnityAction onNext = delegate {  };
+        public UnityAction onRestartLevel; //int value represents attempt number
 
         #endregion
 
@@ -26,13 +28,6 @@ namespace Signals
         public UnityAction onFirstTimeTouchTaken =delegate {  };
         public UnityAction onEnableInput = delegate {  };
         public UnityAction onDisableInput = delegate {  };
-
-        #endregion
-
-        #region Level
-
-        public UnityAction onNextLevel;
-        public UnityAction<int> onResetLevel; //int value represents attempt number
 
         #endregion
 

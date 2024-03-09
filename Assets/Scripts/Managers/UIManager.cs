@@ -22,11 +22,7 @@ namespace Managers
         private void Awake()
         {
             _uiPanelHandler = new UIPanelHandler(ref uiPanelGameObjects);
-            foreach (var panelGameObject in uiPanelGameObjects)
-            {
-                panelGameObject.SetActive(false);
-            }
-            _uiPanelHandler.Execute(UIPanels.StartPanel,true);
+            Reset();
         }
 
         #region Event Subscriptions
@@ -42,6 +38,8 @@ namespace Managers
             GameSignals.Instance.onPlay += OnPlay;
             GameSignals.Instance.onFail += OnFail;
             GameSignals.Instance.onSuccess += OnSuccess;
+            GameSignals.Instance.onRestartLevel += OnRestart;
+            GameSignals.Instance.onNext += OnNext;
             GameSignals.Instance.onSetScoreText += OnSetScoreText;
             GameSignals.Instance.onSetLevelScoreBorder += OnSetLevelScoreBorder;
             GameSignals.Instance.onSetLevelText += OnSetLevelText;
@@ -53,6 +51,8 @@ namespace Managers
             GameSignals.Instance.onPlay -= OnPlay;
             GameSignals.Instance.onFail -= OnFail;
             GameSignals.Instance.onSuccess -= OnSuccess;
+            GameSignals.Instance.onRestartLevel -= OnRestart;
+            GameSignals.Instance.onNext -= OnNext;
             GameSignals.Instance.onSetScoreText -= OnSetScoreText;
             GameSignals.Instance.onSetLevelScoreBorder -= OnSetLevelScoreBorder;
             GameSignals.Instance.onSetLevelText -= OnSetLevelText;
@@ -111,5 +111,35 @@ namespace Managers
         {
             slider.SetAttemptText(attemptNumber);
         }
-    }
+
+        private void OnRestart()
+        {
+            Reset();
+        }
+
+        private void OnNext()
+        {
+            Reset();
+        }
+
+        private void Reset()
+        {
+            foreach (var panelGameObject in uiPanelGameObjects)
+            {
+                panelGameObject.SetActive(false);
+            }
+
+            _uiPanelHandler.Execute(UIPanels.StartPanel, true);
+        }
+        public void Restart()
+        {
+            GameSignals.Instance.onRestartLevel?.Invoke();
+        }
+
+        public void NextLevel()
+        {
+            GameSignals.Instance.onNext?.Invoke();
+            timer.IncreaseTimeBorder();
+        }
+    } 
 }

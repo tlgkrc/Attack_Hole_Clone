@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data:
   - collectableType: 0
-    value: 20.8
+    value: 4.6
   - collectableType: 2
-    value: 2.2
+    value: 6.7

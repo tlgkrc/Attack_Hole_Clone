@@ -17,15 +17,16 @@ namespace Controllers.UI
         [SerializeField] private Image timeProgressImage;
         [SerializeField] private TextMeshProUGUI timeTMP;
         
-        private const int TimeBorder = 20;
+        private int _timeBorder = 20;
         private int _currentTime;
-        private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private CancellationTokenSource _cancellationTokenSource;
 
         #endregion
 
         public void StartTimer()
         {
-            _currentTime = TimeBorder;
+            _cancellationTokenSource = new CancellationTokenSource();
+            _currentTime = _timeBorder;
             TimeCounter();
             
         }
@@ -47,12 +48,17 @@ namespace Controllers.UI
             int minutes = _currentTime / 60;
             int seconds = _currentTime % 60;
             timeTMP.text = $"{minutes:00}:{seconds:00}";
-            timeProgressImage.DOFillAmount((float)_currentTime / TimeBorder, 1f).SetEase(Ease.Linear);
+            timeProgressImage.DOFillAmount((float)_currentTime / _timeBorder, 1f).SetEase(Ease.Linear);
         }
 
         public void StopTimer()
         {
             _cancellationTokenSource.Cancel();
+        }
+
+        public void IncreaseTimeBorder()
+        {
+            _timeBorder += 4;
         }
     }
 }

@@ -24,9 +24,8 @@ namespace Controllers.Player
         {
             if (other.CompareTag("Collectable"))
             {
-                var parent = other.transform.parent;
-                GameSignals.Instance.onWarnCollectable?.Invoke(parent.gameObject);
-                parent.gameObject.SetActive(false);
+                GameSignals.Instance.onWarnCollectable?.Invoke(other.gameObject);
+                other.gameObject.SetActive(false);
                 FillCircle();
             }
         }

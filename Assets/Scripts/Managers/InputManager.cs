@@ -44,7 +44,7 @@ namespace Managers
             GameSignals.Instance.onEnableInput += OnEnableInput;
             GameSignals.Instance.onDisableInput += OnDisableInput;
             GameSignals.Instance.onPlay += OnPlay;
-            GameSignals.Instance.onResetLevel += OnReset;
+            GameSignals.Instance.onRestartLevel += OnReset;
         }
 
         private void UnsubscribeEvents()
@@ -52,7 +52,7 @@ namespace Managers
             GameSignals.Instance.onEnableInput -= OnEnableInput;
             GameSignals.Instance.onDisableInput -= OnDisableInput;
             GameSignals.Instance.onPlay -= OnPlay;
-            GameSignals.Instance.onResetLevel -= OnReset;
+            GameSignals.Instance.onRestartLevel -= OnReset;
         }
 
         private void OnDisable()
@@ -105,7 +105,7 @@ namespace Managers
             isReadyForTouch = false;
         }
 
-        private void OnReset(int attemptNumber)
+        private void OnReset()
         {
             isReadyForTouch = false;
         }
