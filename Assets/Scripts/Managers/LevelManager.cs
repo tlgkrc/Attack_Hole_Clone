@@ -87,6 +87,7 @@ namespace Managers
         {
             _attemptNumber = 1;
             _currentLevel++;
+            _currentLevel %= _levelDatas.Datas.Count;
             GameSignals.Instance.onSetAttemptText?.Invoke(_attemptNumber);
             GameSignals.Instance.onSetLevelText?.Invoke(_currentLevel+1);
             _clearActiveLevelCommand.Execute();
@@ -111,7 +112,6 @@ namespace Managers
         {
             var currentScore = GameSignals.Instance.onGetCurrentScore?.Invoke();
             FinisLevel(currentScore);
-            
         }
 
         private async UniTask FinisLevel(float? currentScore)

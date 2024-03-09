@@ -25,6 +25,7 @@ namespace Controllers.Player
             if (other.CompareTag("Collectable"))
             {
                 GameSignals.Instance.onWarnCollectable?.Invoke(other.gameObject);
+                manager.PlayEffect();
                 other.gameObject.SetActive(false);
                 FillCircle();
             }

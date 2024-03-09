@@ -17,6 +17,7 @@ namespace Managers
         [SerializeField] private MovementController movementController;
         [SerializeField] private PhysicController physicController;
         [SerializeField] private HoleController holeController;
+        [SerializeField] private Effect effectController;
         private PlayerData _playerData = new PlayerData();
         #endregion
 
@@ -116,6 +117,11 @@ namespace Managers
             await UniTask.Delay(1000);
             transform.localPosition = Vector3.zero;
             transform.localScale = Vector3.one;
+        }
+
+        public void PlayEffect()
+        {
+            effectController.Play();
         }
     }
 }

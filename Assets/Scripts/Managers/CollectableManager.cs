@@ -75,6 +75,7 @@ namespace Managers
             if (target.GetInstanceID()== gameObject.GetInstanceID())
             {
                 GameSignals.Instance.onSetNewScore?.Invoke(_myValue);
+                GameSignals.Instance.onPlayAmmoSound?.Invoke(collectableType);
             } 
         }
     }

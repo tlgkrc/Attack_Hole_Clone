@@ -34,6 +34,7 @@ namespace Signals
         #region Collectable
 
         public UnityAction<GameObject> onWarnCollectable;
+        public UnityAction<CollectableType> onPlayAmmoSound;
 
         #endregion
 

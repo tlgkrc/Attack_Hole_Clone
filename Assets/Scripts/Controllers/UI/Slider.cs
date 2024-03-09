@@ -23,7 +23,8 @@ namespace Controllers.UI
         public void SetScore(float newScore)
         {
             slider.DOValue(newScore / _scoreBorder,.2f);
-            scoreTMP.text = newScore.ToString();
+            var newValue = newScore.ToString("F1");
+            scoreTMP.text = newValue;
 
         }
 
