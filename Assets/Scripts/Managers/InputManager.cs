@@ -45,6 +45,7 @@ namespace Managers
             GameSignals.Instance.onDisableInput += OnDisableInput;
             GameSignals.Instance.onPlay += OnPlay;
             GameSignals.Instance.onRestartLevel += OnReset;
+            GameSignals.Instance.onLevelFinish += OnLevelFinish;
         }
 
         private void UnsubscribeEvents()
@@ -53,6 +54,7 @@ namespace Managers
             GameSignals.Instance.onDisableInput -= OnDisableInput;
             GameSignals.Instance.onPlay -= OnPlay;
             GameSignals.Instance.onRestartLevel -= OnReset;
+            GameSignals.Instance.onLevelFinish -= OnLevelFinish;
         }
 
         private void OnDisable()
@@ -119,8 +121,8 @@ namespace Managers
 
         private void MouseButtonUp()
         {
-            _moveVector = Vector3.zero;
             GameSignals.Instance.onInputReleased?.Invoke();
+            _moveVector = Vector3.zero;
         }
 
         private void MouseButtonDown()
@@ -138,6 +140,11 @@ namespace Managers
                 ValueX = _moveVector.x,
                 ValueZ = _moveVector.z
             });
+        }
+
+        private void OnLevelFinish()
+        {
+            isReadyForTouch = false;
         }
     }
 }

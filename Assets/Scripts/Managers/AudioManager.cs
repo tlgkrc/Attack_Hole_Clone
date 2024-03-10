@@ -33,12 +33,16 @@ namespace Managers
         private void SubscribeEvents()
         {
             GameSignals.Instance.onPlayAmmoSound += OnPlayAmmoSound;
+            GameSignals.Instance.onLevelFinish += OnLevelFinish;
+            GameSignals.Instance.onPlay += OnPlay;
         }
 
         
         private void UnsubscribeEvents()
         {
             GameSignals.Instance.onPlayAmmoSound -= OnPlayAmmoSound;
+            GameSignals.Instance.onLevelFinish -= OnLevelFinish;
+            GameSignals.Instance.onPlay -= OnPlay;
         }
 
         private void OnDisable()
@@ -59,6 +63,16 @@ namespace Managers
             {
                 ammoAudioSource.PlayOneShot(shotgunGunAudioClip);
             }
+        }
+
+        private void OnLevelFinish()
+        {
+            ammoAudioSource.mute = true;
+        }
+
+        private void OnPlay()
+        {
+            ammoAudioSource.mute = false;
         }
     }
 }

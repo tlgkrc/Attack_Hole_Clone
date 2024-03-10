@@ -100,6 +100,8 @@ namespace Managers
         private void OnPlay()
         {
             GameSignals.Instance.onSetCameraTarget?.Invoke(transform);
+            transform.localScale = Vector3.one;
+            physicController.ActivatePhysic();
         }
 
         private Transform OnGetPlayerTransform()
@@ -110,6 +112,7 @@ namespace Managers
         private void OnLevelFinish()
         {
             movementController.DeactivateMovement();
+            physicController.DeactivatePhysic();
         }
 
         private async void Reset()

@@ -15,10 +15,10 @@ MonoBehaviour:
   levelDatas:
     Datas:
     - LevelId: 1
-      LevelPassScore: 80
+      LevelPassScore: 300
       LevelGameObject: {fileID: 9020263831907369077, guid: f83c3f6df574e6b46a44af239046fb0b,
         type: 3}
     - LevelId: 2
-      LevelPassScore: 100
+      LevelPassScore: 350
       LevelGameObject: {fileID: 9020263831907369077, guid: 233b1b41e3443d546853fed6ab4feb0e,
         type: 3}

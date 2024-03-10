@@ -6,6 +6,11 @@ namespace Controllers.Player
 {
     public class PhysicController : MonoBehaviour
     {
+        #region Self Variables
+
+        [SerializeField] private new Collider collider;
+
+        #endregion
         private PhysicData _physicData;
         private void OnTriggerEnter(Collider other)
         {
@@ -25,6 +30,16 @@ namespace Controllers.Player
         public void SetPhysicData(PhysicData physicData)
         {
             _physicData = physicData;
+        }
+
+        public void ActivatePhysic()
+        {
+            collider.isTrigger = true;
+        }
+        
+        public void DeactivatePhysic()
+        {
+            collider.isTrigger = false;
         }
     }
 }
