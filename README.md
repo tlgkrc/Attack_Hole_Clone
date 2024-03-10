@@ -1,8 +1,7 @@
 # Attack_Hole_Clone
 
 ## Indroduce
-Hi👊,I'm from Turkey,and I do game development.
-I developed this game for mechanic practice. Used models were made by me in blender. Also I edited used sounds in Audacity. Have a nice day
+Hey!👊 I'm from Turkey, and I'm into game development. I whipped up this game for some mechanical practice. The models? All me, done in Blender. And those sounds you hear? Edited them up real nice in Audacity. Have a great day! 🎮
 
 Tolga Karaca ⏩ [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/github.svg' alt='github' height='40' color='#bd2c00'>](https://github.com/tolgakrc)  [<img src='https://raw.githubusercontent.com/McGelerin/Colors_Runners_Clone/main/Game_Pic/Github.png' alt='github' height='40' color='#bd2c00'>](https://github.com/tolgakrc) [<img src='https://cdn.jsdelivr.net/npm/simple-icons@3.0.1/icons/linkedin.svg' alt='linkedin' height='40'>](https://www.linkedin.com/in/tolga-karaca-7a5baa110//) [<img src='https://raw.githubusercontent.com/McGelerin/Colors_Runners_Clone/main/Game_Pic/LinkedIn.png' alt='linkedin' height='40'>](https://www.linkedin.com/in/tolga-karaca-7a5baa110//) ⏪
 
